@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô tả dự án - Movie Discovery App</title>
+    <style>
+        :root {
+            --primary: #ff007f; /* Pink Neon */
+            --bg: #1a1a1a;
+            --card: #2d2d2d;
+            --text: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: var(--card);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        h2 { color: var(--primary); margin-top: 30px; }
+        h3 { color: #lavender; }
+        ul { padding-left: 20px; }
+        code { background: #444; padding: 2px 5px; border-radius: 4px; color: #ffcc00; }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { opacity: 0.8; transform: scale(1.05); }
+        .tech-stack { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tag { background: #444; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mô Tả Quá Trình Xây Dựng Ứng Dụng</h1>
+        
+        <div class="tech-stack">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3 (Grid/Flex)</span>
+            <span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">LocalStorage</span>
+        </div>
+
+        <p><strong>Sinh viên thực hiện:</strong> Nguyễn Hữu Trí (ATRI)</p>
+        <p><strong>Mã số sinh viên:</strong> 231A011138</p>
+
+        <hr>
+
+        <h2>1. Kiến trúc Giao diện (Frontend)</h2>
+        <h3>Bố cục (Layout)</h3>
+        <ul>
+            <li>Sử dụng <strong>CSS Grid</strong> để chia trang thành 2 cột chính: Sidebar (chiếm 250px) để lọc dữ liệu và Main Content để hiển thị danh sách phim.</li>
+            <li>Hệ thống <strong>Navbar ngang</strong> phía trên được xây dựng bằng <strong>Flexbox</strong>, giúp điều hướng mượt mà giữa các trang nội dung.</li>
+            <li>Thiết kế <strong>Responsive</strong>: Sử dụng Media Queries để tự động chuyển từ bố cục 2 cột sang 1 cột trên thiết bị di động, đảm bảo trải nghiệm người dùng tốt nhất.</li>
+        </ul>
+
+        <h3>Hệ thống màu sắc (Theming)</h3>
+        <ul>
+            <li>Sử dụng <strong>CSS Variables</strong> (biến CSS) để quản lý màu sắc tập trung.</li>
+            <li>Tính năng <strong>Dark/Light Mode</strong> cho phép thay đổi toàn bộ giao diện chỉ bằng việc thêm/xóa class <code>dark-mode</code> vào thẻ body.</li>
+        </ul>
+
+        <h2>2. Xử lý Logic và Dữ liệu (Backend Logic)</h2>
+        <h3>Quản lý dữ liệu phim</h3>
+        <ul>
+            <li>Dữ liệu được tổ chức dưới dạng một mảng các đối tượng (Array of Objects) trong file <code>app.js</code>, bao gồm các trường: <code>id, title, year, genres, poster, desc, director</code>.</li>
+            <li>Hàm <code>renderMovies()</code> sử dụng phương thức <code>map()</code> để tự động tạo các thẻ HTML từ mảng dữ liệu.</li>
+        </ul>
+
+        <h3>Tính năng Lọc đa năng</h3>
+        <ul>
+            <li><strong>Lọc theo thể loại:</strong> Hệ thống tự động quét toàn bộ mảng dữ liệu để tìm ra các thể loại phim duy nhất và tạo ra các Checkbox tương ứng.</li>
+            <li><strong>Tìm kiếm thời gian thực:</strong> Áp dụng sự kiện <code>input</code> kết hợp kỹ thuật <strong>Debounce</strong> (trễ 400ms) để tối ưu hiệu năng, tránh việc trình duyệt phải render lại quá nhiều lần khi người dùng gõ phím nhanh.</li>
+            <li><strong>Tích hợp:</strong> Bộ lọc thể loại và ô tìm kiếm hoạt động đồng thời thông qua hàm <code>applyFilters()</code>.</li>
+        </ul>
+
+        <h2>3. Trải nghiệm người dùng (UX/UI)</h2>
+        <ul>
+            <li><strong>Modal (Popup):</strong> Khi nhấn vào một bộ phim, thông tin chi tiết sẽ hiện ra trong một cửa sổ Modal thay vì chuyển trang, giúp người dùng không bị mất dấu vị trí đang xem.</li>
+            <li><strong>Persistence:</strong> Sử dụng <code>localStorage</code> để lưu lựa chọn Chế độ tối của người dùng. Khi load lại trang, giao diện sẽ giữ nguyên trạng thái trước đó.</li>
+            <li><strong>Hiệu ứng:</strong> Thêm hiệu ứng <code>hover</code> phóng to nhẹ và đổ bóng cho Movie Cards để tạo cảm giác tương tác sinh động.</li>
+        </ul>
+
+        <h2>4. Tối ưu hóa & Triển khai</h2>
+        <ul>
+            <li>Ảnh poster được lưu trữ cục bộ trong thư mục <code>images/</code> giúp tăng tốc độ tải trang.</li>
+            <li>Mã nguồn được tổ chức sạch sẽ, tách biệt giữa cấu trúc (HTML), định dạng (CSS) và logic (JS).</li>
+            <li>Dự án được triển khai miễn phí thông qua <strong>GitHub Pages</strong>.</li>
+		<li>Tất cả các hình ảnh đã được nén qua web <strong>tinyPNG</strong>.</li>
+        </ul>
+
+        <a href="index.html" class="back-btn">← Quay lại Trang chủ</a>
+    </div>
+</body>
+</html>
